@@ -13,9 +13,9 @@ set(FLUID_SRC
         fluid/Settings.h
         )
 if (MSVC)
-    add_executable(RocksDbViewer WIN32 main.cpp ${FLUID_SRC} table/FileTable.h config/PmDlSettings.h)
+    add_executable(RocksDbViewer WIN32 main.cpp ${FLUID_SRC})
 else ()
-    add_executable(RocksDbViewer main.cpp ${FLUID_SRC} table/FileTable.h config/PmDlSettings.h table/TableModel.h Style.h)
+    add_executable(RocksDbViewer main.cpp ${FLUID_SRC} Style.h)
 endif ()
 file(COPY icon.png DESTINATION ${CMAKE_BINARY_DIR})
 
