@@ -1,0 +1,45 @@
+# data file for the Fltk User Interface Designer (fluid)
+version 1.0308
+header_name {.h}
+code_name {.cxx}
+class MainGui {open
+} {
+  Function {make_window()} {open
+  } {
+    Fl_Window mainWindow {
+      label RocksDbViewer open
+      xywh {975 265 995 690} type Double resizable visible
+    } {
+      Fl_Menu_Bar {} {open
+        xywh {10 0 666 26} box NO_BOX color 40
+      } {}
+      Fl_Input input_path {
+        label {Path:}
+        xywh {50 25 830 30}
+      }
+      Fl_Browser browser_column_families {
+        label {Column Familes}
+        xywh {15 100 215 545} type Hold align 1
+      }
+      Fl_Browser browser_keys {
+        label Keys
+        xywh {235 100 340 545} type Hold align 1
+      }
+      Fl_Text_Display text_value {selected
+        xywh {580 100 410 580} resizable
+      }
+      Fl_Light_Button button_connect {
+        label Connect
+        xywh {900 25 90 30}
+      }
+      Fl_Input input_filter_column_families {
+        label Filter
+        xywh {50 650 180 30} when 1
+      }
+      Fl_Input input_filter_keys {
+        label Filter
+        xywh {275 650 300 30} when 1
+      }
+    }
+  }
+}

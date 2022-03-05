@@ -1,0 +1,48 @@
+
+// Start
+mainGui.FileList->callback(fileList_Cb);
+// CB
+void fileList_Cb(Fl_Widget *widget) {
+    int R = mainGui.FileList->callback_row();
+    int C = mainGui.FileList->callback_col();
+    auto context = mainGui.FileList->callback_context();
+    LOG_INFO << "Row: " << R << " Column: " << C << " Context: " << context;
+
+    switch (context) {
+        case Fl_Table::TableContext::CONTEXT_NONE: {
+            LOG_INFO << "CONTEXT_NONE";
+            break;
+        }
+        case Fl_Table::CONTEXT_STARTPAGE: {
+            LOG_INFO << "CONTEXT_STARTPAGE";
+            break;
+        }
+        case Fl_Table::CONTEXT_ENDPAGE: {
+            LOG_INFO << "CONTEXT_ENDPAGE";
+            break;
+        }
+        case Fl_Table::CONTEXT_ROW_HEADER: {
+            LOG_INFO << "CONTEXT_ROW_HEADER";
+            break;
+        }
+        case Fl_Table::CONTEXT_COL_HEADER: {
+            LOG_INFO << "CONTEXT_COL_HEADER";
+            break;
+        }
+        case Fl_Table::CONTEXT_CELL: {
+            LOG_INFO << "CONTEXT_CELL";
+            mainGui.FileList->set_selection(R, 0, R, 2);
+            break;
+        }
+        case Fl_Table::CONTEXT_TABLE: {
+            LOG_INFO << "CONTEXT_TABLE";
+            break;
+        }
+        case Fl_Table::CONTEXT_RC_RESIZE: {
+            LOG_INFO << "CONTEXT_RC_RESIZE";
+            break;
+        }
+    }
+
+}
+//Cb End
