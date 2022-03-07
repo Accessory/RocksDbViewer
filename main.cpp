@@ -1,4 +1,5 @@
 // clang-format off
+#include <algorithm>
 #include <FlowDatabase/RocksDbDatabase.h>
 #include "fluid/MainGui.h"
 #include <FL/Fl.H>
