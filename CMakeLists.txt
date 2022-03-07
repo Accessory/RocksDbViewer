@@ -9,8 +9,6 @@ include_directories($ENV{FLOW_ROOT})
 set(FLUID_SRC
         fluid/MainGui.cxx
         fluid/MainGui.h
-        fluid/Settings.cxx
-        fluid/Settings.h
         )
 if (MSVC)
     add_executable(RocksDbViewer WIN32 main.cpp ${FLUID_SRC})

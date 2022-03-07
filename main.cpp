@@ -11,8 +11,6 @@
 #include <vector>
 #include "Style.h"
 #include <FlowUtils/IntervalRunner.h>
-
-#include <windows.h>
 // clang-format on
 
 MainGui mainGui;
