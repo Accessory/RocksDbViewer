@@ -25,12 +25,8 @@ Fl_Double_Window *window;
 std::unique_ptr<Fl_Text_Buffer> text_buffer =
     std::make_unique<Fl_Text_Buffer>();
 
-const std::string CONFIG_FILE = FlowFile::combinePath(
-    FlowFile::homeFolder(), "/.config/RocksDbViewer/config.txt");
 const std::string LAST_FILE = FlowFile::combinePath(
     FlowFile::homeFolder(), "/.config/RocksDbViewer/last.txt");
-const std::string CONFIG_AVAILABLE_FOLDER = FlowFile::combinePath(
-    FlowFile::homeFolder(), "/.config/RocksDbViewer/configs_available/");
 
 void set_icon(Fl_Double_Window *window) {
   if (FlowFile::exists("icon.png")) {
