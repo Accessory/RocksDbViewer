@@ -25,10 +25,6 @@ find_package(FLTK)
 include_directories(${FLTK_INCLUDE_DIR})
 target_link_libraries(RocksDbViewer ${FLTK_LIBRARIES})
 
-find_package(CURL)
-include_directories(${CURL_INCLUDE_DIRS})
-target_link_libraries(RocksDbViewer ${CURL_LIBRARIES})
-
 if (MSVC)
     target_link_libraries(RocksDbViewer rpcrt4.lib)
     target_link_libraries(RocksDbViewer shlwapi.lib)
