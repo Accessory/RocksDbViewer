@@ -39,6 +39,10 @@ else ()
     target_link_libraries(RocksDbViewer zstd)
 endif ()
 
+find_package(Boost 1.70.0 COMPONENTS system filesystem REQUIRED)
+include_directories(${Boost_INCLUDE_DIRS})
+target_link_libraries(RocksDbViewer ${Boost_LIBRARIES})
+
 if (UNIX)
     include(GNUInstallDirs)
 
