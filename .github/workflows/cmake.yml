@@ -43,7 +43,7 @@ jobs:
       shell: bash
     
     - name: Get Dependencies
-      run: sudo apt-get install librocksdb-dev libgflags-dev libsnappy-dev zlib1g-dev libbz2-dev libzstd-dev libfltk1.3-dev
+      run: sudo apt-get install librocksdb-dev liblz4-dev libgflags-dev libsnappy-dev zlib1g-dev libbz2-dev libzstd-dev libfltk1.3-dev
 
     - name: Get Reps
       run: mkdir ${{env.FLOW_ROOT}} && cd ${{env.FLOW_ROOT}} && git clone https://github.com/Accessory/FlowUtils.git && git clone https://github.com/Accessory/FlowDatabase.git
