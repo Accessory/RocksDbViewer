@@ -32,7 +32,7 @@ jobs:
       uses: egor-tensin/build-boost@v1
       with:
         version: 1.78.0
-        libraries: filesystem program_options system
+        libraries: filesystem system
         platform: x64
         configuration: Release
 
