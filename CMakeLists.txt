@@ -44,7 +44,7 @@ include_directories(${Boost_INCLUDE_DIRS})
 target_link_libraries(RocksDbViewer ${Boost_LIBRARIES})
 
 find_package(Threads)
-target_link_libraries(MeMa ${CMAKE_THREAD_LIBS_INIT})
+target_link_libraries(RocksDbViewer ${CMAKE_THREAD_LIBS_INIT})
 
 if (UNIX)
     include(GNUInstallDirs)
