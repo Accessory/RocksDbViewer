@@ -39,6 +39,22 @@ void set_icon(Fl_Double_Window *window) {
   }
 }
 
+void managaActiveStatus() {
+  if (!db || !db->IsOpen()) {
+    mainGui.add_column_family_button->deactivate();
+    mainGui.add_key_button->deactivate();
+    mainGui.save_content_button->deactivate();
+    return;
+  }
+  mainGui.add_column_family_button->activate();
+
+  browser_column_families_selected.empty()
+      ? mainGui.add_key_button->deactivate()
+      : mainGui.add_key_button->activate();
+  browser_keys_selected.empty() ? mainGui.save_content_button->deactivate()
+                                : mainGui.save_content_button->activate();
+}
+
 void fill_browser_column_families() {
   mainGui.browser_column_families->clear();
   for (const auto &cf : column_families) {
@@ -64,6 +80,19 @@ void fill_browser_keys() {
   mainGui.browser_keys->redraw();
   Fl::flush();
 }
+
+void load_browser_keys() {
+  if (browser_column_families_selected.empty()) {
+    return;
+  }
+
+  keys = db->GetKeys(browser_column_families_selected);
+  std::string browser_keys_label =
+      "Keys - Size: " + std::to_string(keys.size());
+  mainGui.browser_keys->copy_label(browser_keys_label.c_str());
+  fill_browser_keys();
+}
+
 void cb_browser_column_families(Fl_Widget *widget) {
   const auto selected_item = mainGui.browser_column_families->value();
   if (selected_item == 0) {
@@ -72,11 +101,8 @@ void cb_browser_column_families(Fl_Widget *widget) {
   browser_column_families_selected =
       mainGui.browser_column_families->text(selected_item);
 
-  keys = db->GetKeys(browser_column_families_selected);
-  std::string browser_keys_label =
-      "Keys - Size: " + std::to_string(keys.size());
-  mainGui.browser_keys->copy_label(browser_keys_label.c_str());
-  fill_browser_keys();
+  load_browser_keys();
+  managaActiveStatus();
   mainGui.mainWindow->redraw();
 }
 
@@ -90,6 +116,7 @@ void cb_browser_keys(Fl_Widget *widget) {
       db->Get(browser_keys_selected, browser_column_families_selected);
 
   text_buffer->text(value.c_str());
+  managaActiveStatus();
 }
 
 void cb_connect(Fl_Widget *widget) {
@@ -107,6 +134,7 @@ void cb_connect(Fl_Widget *widget) {
     mainGui.browser_column_families->clear();
     LOG_INFO << "Connection closed";
   }
+  managaActiveStatus();
 }
 
 void load_last() {
@@ -136,7 +164,7 @@ void cb_filter_keys(Fl_Widget *widget) {
     return;
   }
   filter_keys = std::move(tmp);
-  runner.isRunning() ? runner.ResetTimer() : runner.Run();
+  runner.IsRunning() ? runner.ResetTimer() : runner.Run();
 }
 
 void cb_filter_column_families(Fl_Widget *widget) {
@@ -147,11 +175,40 @@ void cb_filter_column_families(Fl_Widget *widget) {
   filter_column_families = std::move(tmp);
   fill_browser_column_families();
 }
-
 void cb_main_window(Fl_Widget *widget) {
   db = nullptr;
   save_last();
   window->hide();
+}
+
+void cb_save_content(Fl_Widget *widget) {
+  if (db->IsOpen() && browser_column_families_selected.empty() &&
+      browser_keys_selected.empty()) {
+    return;
+  }
+
+  const auto value = std::string(mainGui.text_value->buffer()->text(),
+                                 mainGui.text_value->buffer()->length());
+
+  db->Put(browser_column_families_selected, browser_keys_selected, value);
+}
+
+void cb_add_column_family(Fl_Widget *widget) {
+  if (!db || !db->IsOpen()) {
+    return;
+  }
+
+  db->CreateColumnFamilyIfNotExists(filter_column_families);
+  load_column_families();
+}
+
+void cb_add_key(Fl_Widget *widget) {
+  if (!db || !db->IsOpen() || browser_column_families_selected.empty()) {
+    return;
+  }
+
+  db->Put(browser_column_families_selected, filter_keys, "");
+  load_browser_keys();
 }
 
 int main(int argc, char **argv) {
@@ -163,6 +220,7 @@ int main(int argc, char **argv) {
 
   window = mainGui.make_window();
   window->callback(cb_main_window);
+
   mainGui.button_connect->callback(cb_connect);
   mainGui.browser_column_families->callback(cb_browser_column_families);
   mainGui.browser_keys->callback(cb_browser_keys);
@@ -171,10 +229,15 @@ int main(int argc, char **argv) {
   mainGui.input_filter_column_families->callback(cb_filter_column_families);
   mainGui.input_filter_keys->callback(cb_filter_keys);
 
+  mainGui.add_column_family_button->callback(cb_add_column_family);
+  mainGui.add_key_button->callback(cb_add_key);
+  mainGui.save_content_button->callback(cb_save_content);
+
   window->end();
   set_icon(window);
 
   load_last();
   window->show(argc, argv);
+  managaActiveStatus();
   return Fl::run();
 }
