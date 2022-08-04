@@ -27,5 +27,7 @@ public:
   Fl_Button *add_key_button;
   Fl_Button *save_content_button;
   Fl_Text_Editor *text_value;
+  Fl_Button *del_column_family_button;
+  Fl_Button *del_key_button;
 };
 #endif

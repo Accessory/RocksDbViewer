@@ -35,27 +35,35 @@ class MainGui {open
       }
       Fl_Input input_filter_column_families {
         label Filter
-        xywh {50 650 125 30} when 1
+        xywh {50 650 65 30} when 1
       }
       Fl_Input input_filter_keys {
         label Filter
-        xywh {275 650 240 30} when 1
+        xywh {275 650 185 30} when 1
       }
       Fl_Button add_column_family_button {
         label Add
-        xywh {180 650 50 30}
+        xywh {120 650 50 30}
       }
       Fl_Button add_key_button {
         label Add
-        xywh {520 650 50 30}
+        xywh {465 650 50 30}
       }
       Fl_Button save_content_button {
         label Save
         xywh {585 650 405 30}
       }
       Fl_Text_Editor text_value {
-        label Content selected
+        label Content
         xywh {580 100 410 545}
+      }
+      Fl_Button del_column_family_button {
+        label Del
+        xywh {175 650 50 30}
+      }
+      Fl_Button del_key_button {
+        label Del selected
+        xywh {520 650 50 30}
       }
     }
   }
