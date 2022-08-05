@@ -1,2 +1,2 @@
 # RocksDbViewer
-Let you read a RocksDb Database.
+Let's you read and write a RocksDb Database.
