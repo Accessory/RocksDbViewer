@@ -9,6 +9,8 @@
 #include <FL/Fl_Browser.H>
 #include <FL/Fl_Text_Display.H>
 #include <FL/Fl_Light_Button.H>
+#include <FL/Fl_Button.H>
+#include <FL/Fl_Text_Editor.H>
 
 class MainGui {
 public:
@@ -17,9 +19,15 @@ public:
   Fl_Input *input_path;
   Fl_Browser *browser_column_families;
   Fl_Browser *browser_keys;
-  Fl_Text_Display *text_value;
+  Fl_Text_Display *text_value_old;
   Fl_Light_Button *button_connect;
   Fl_Input *input_filter_column_families;
   Fl_Input *input_filter_keys;
+  Fl_Button *add_column_family_button;
+  Fl_Button *add_key_button;
+  Fl_Button *save_content_button;
+  Fl_Text_Editor *text_value;
+  Fl_Button *del_column_family_button;
+  Fl_Button *del_key_button;
 };
 #endif

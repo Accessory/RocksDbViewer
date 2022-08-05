@@ -8,7 +8,7 @@ class MainGui {open
   } {
     Fl_Window mainWindow {
       label RocksDbViewer open
-      xywh {975 265 995 690} type Double resizable visible
+      xywh {490 258 995 690} type Double resizable visible
     } {
       Fl_Menu_Bar {} {open
         xywh {10 0 666 26} box NO_BOX color 40
@@ -25,8 +25,9 @@ class MainGui {open
         label Keys
         xywh {235 100 340 545} type Hold align 1
       }
-      Fl_Text_Display text_value {selected
-        xywh {580 100 410 580} resizable
+      Fl_Text_Display text_value_old {
+        label Content
+        xywh {580 100 410 545} hide resizable
       }
       Fl_Light_Button button_connect {
         label Connect
@@ -34,11 +35,35 @@ class MainGui {open
       }
       Fl_Input input_filter_column_families {
         label Filter
-        xywh {50 650 180 30} when 1
+        xywh {50 650 65 30} when 1
       }
       Fl_Input input_filter_keys {
         label Filter
-        xywh {275 650 300 30} when 1
+        xywh {275 650 185 30} when 1
+      }
+      Fl_Button add_column_family_button {
+        label Add
+        xywh {120 650 50 30}
+      }
+      Fl_Button add_key_button {
+        label Add
+        xywh {465 650 50 30}
+      }
+      Fl_Button save_content_button {
+        label Save
+        xywh {585 650 405 30}
+      }
+      Fl_Text_Editor text_value {
+        label Content
+        xywh {580 100 410 545}
+      }
+      Fl_Button del_column_family_button {
+        label Del
+        xywh {175 650 50 30}
+      }
+      Fl_Button del_key_button {
+        label Del selected
+        xywh {520 650 50 30}
       }
     }
   }

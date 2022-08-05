@@ -19,17 +19,30 @@ Fl_Double_Window* MainGui::make_window() {
       browser_keys->type(2);
       browser_keys->align(Fl_Align(FL_ALIGN_TOP));
     } // Fl_Browser* browser_keys
-    { text_value = new Fl_Text_Display(580, 100, 410, 580);
-      Fl_Group::current()->resizable(text_value);
-    } // Fl_Text_Display* text_value
+    { text_value_old = new Fl_Text_Display(580, 100, 410, 545, "Content");
+      text_value_old->hide();
+      Fl_Group::current()->resizable(text_value_old);
+    } // Fl_Text_Display* text_value_old
     { button_connect = new Fl_Light_Button(900, 25, 90, 30, "Connect");
     } // Fl_Light_Button* button_connect
-    { input_filter_column_families = new Fl_Input(50, 650, 180, 30, "Filter");
+    { input_filter_column_families = new Fl_Input(50, 650, 65, 30, "Filter");
       input_filter_column_families->when(FL_WHEN_CHANGED);
     } // Fl_Input* input_filter_column_families
-    { input_filter_keys = new Fl_Input(275, 650, 300, 30, "Filter");
+    { input_filter_keys = new Fl_Input(275, 650, 185, 30, "Filter");
       input_filter_keys->when(FL_WHEN_CHANGED);
     } // Fl_Input* input_filter_keys
+    { add_column_family_button = new Fl_Button(120, 650, 50, 30, "Add");
+    } // Fl_Button* add_column_family_button
+    { add_key_button = new Fl_Button(465, 650, 50, 30, "Add");
+    } // Fl_Button* add_key_button
+    { save_content_button = new Fl_Button(585, 650, 405, 30, "Save");
+    } // Fl_Button* save_content_button
+    { text_value = new Fl_Text_Editor(580, 100, 410, 545, "Content");
+    } // Fl_Text_Editor* text_value
+    { del_column_family_button = new Fl_Button(175, 650, 50, 30, "Del");
+    } // Fl_Button* del_column_family_button
+    { del_key_button = new Fl_Button(520, 650, 50, 30, "Del");
+    } // Fl_Button* del_key_button
     mainWindow->end();
   } // Fl_Double_Window* mainWindow
   return mainWindow;
